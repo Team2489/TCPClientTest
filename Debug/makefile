@@ -40,19 +40,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: test_client
+all: TCPClientTest
 
 # Tool invocations
-test_client: $(OBJS) $(USER_OBJS)
+TCPClientTest: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: NVCC Linker'
-	/usr/local/cuda-6.0/bin/nvcc --cudart static --target-cpu-architecture ARM -m32 -ccbin arm-linux-gnueabihf-g++-4.6 -link -o  "test_client" $(OBJS) $(USER_OBJS) $(LIBS)
+	/usr/local/cuda-6.0/bin/nvcc --cudart static --target-cpu-architecture ARM -m32 -ccbin arm-linux-gnueabihf-g++-4.6 -link -o  "TCPClientTest" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CU_DEPS)$(CPP_DEPS)$(C_DEPS) test_client
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CU_DEPS)$(CPP_DEPS)$(C_DEPS) TCPClientTest
 	-@echo ' '
 
 .PHONY: all clean dependents

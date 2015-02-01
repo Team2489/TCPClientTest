@@ -20,6 +20,7 @@
 # include <stdlib.h>
 
 using std::string;
+using namespace std;
 using libsocket::inet_stream;
 /*
  * This program connects to host:port (usually localhost),
@@ -28,23 +29,30 @@ using libsocket::inet_stream;
  * a message from the server and sends a message back.
  */
 
-int main(void)
+int main(int argc, char* argv[])
 {
     using std::string;
 
     using libsocket::inet_stream;
 
-    string host = "::1";
-    string port = "1235";
+    string host = "localhost";
+    if(argc < 2) {
+    	cout << "Usage ./TCPClientTest <port>" << endl;
+    	return 0;
+    }
+    cout << argv[1] << endl;
+    string port = argv[1];
     string answer;
 
-    answer.resize(32);
-
-	libsocket::inet_stream sock(host,port,LIBSOCKET_IPv6);
+    answer.resize(2000);
+    std::cout << answer << std::endl;
+	libsocket::inet_stream sock(host,port,LIBSOCKET_BOTH);
 	for (;;) {
 		string tst_str;
 		std::getline(std::cin, tst_str);
 		sock << tst_str;
+	    answer.resize(2000);
+	    std::cout << answer << std::endl;
 	}
 
     return 0;
